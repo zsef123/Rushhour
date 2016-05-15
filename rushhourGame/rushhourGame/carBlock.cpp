@@ -1,9 +1,9 @@
 #include "carBlock.h"
 #include "stage.h"
 
-void Car::setPosition(int x, int y) { _x = x; _y = y; }
+void Car::setPosition(const int x,const  int y) { _x = x; _y = y; }
 void Car::getPosition(int *x, int *y) { *x = _x; *y = _y; }
-void Car::setInfo(int size, int vS) { _carSize = size; _vStatus = vS; }
+void Car::setInfo(const int size, const int vS) { _carSize = size; _vStatus = vS; }
 void Car::getInfo(int *size, int *vS) { *size = _carSize; *vS = _vStatus; }
 
 void Car::draw(const int status) {

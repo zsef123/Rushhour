@@ -7,9 +7,9 @@ public:
 	Car() {}
 	Car(int size, int vertical) { _carSize = size; _vStatus = vertical; }
 
-	void setPosition(int x, int y);
+	void setPosition(const int x,const  int y);
 	void getPosition(int *x, int *y);
-	void setInfo(int size, int vS);
+	void setInfo(const int size,const int vS);
 	void getInfo(int *size, int *vS);
 
 	void draw(int status);
