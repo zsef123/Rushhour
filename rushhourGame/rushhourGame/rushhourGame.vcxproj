@@ -147,12 +147,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="carBlock.h" />
+    <ClInclude Include="mouse.h" />
     <ClInclude Include="output.h" />
     <ClInclude Include="stage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="carBlock.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mouse.cpp" />
     <ClCompile Include="stage.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

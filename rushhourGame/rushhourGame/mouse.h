@@ -1,6 +1,6 @@
 #pragma once
 #include <windows.h>
-
+#include "stage.h"
 class inputMouse {
 public:
 	inputMouse() {
@@ -20,6 +20,7 @@ public:
 				break;
 
 			case MOUSE_EVENT: // mouse input 
+				MouseEventProc(_irInBuf[i].Event.MouseEvent);
 				// moved event process while button presse
 				break;
 
