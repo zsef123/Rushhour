@@ -133,7 +133,7 @@ VOID MouseEventProc(MOUSE_EVENT_RECORD mer)
 #define MOUSE_HWHEELED 0x0008
 #endif
 	printf("Mouse event: ");
-	int i = 0, key = 0;
+	int key = 0;
 	switch (mer.dwEventFlags)
 	{
 	case 0:
@@ -143,13 +143,13 @@ VOID MouseEventProc(MOUSE_EVENT_RECORD mer)
 			printf("left button press \n");
 			//이떄 sFlag on
 			
-			for (i = 0; i < sizeof(cars) / sizeof(Car); i++) {
-				if (cars[i].isSelect(mer.dwMousePosition.X/2, mer.dwMousePosition.Y-11) == 1) {
+			for (cur_Car = 0; cur_Car < sizeof(cars) / sizeof(Car); cur_Car++) {
+				if (cars[cur_Car].isSelect(mer.dwMousePosition.X/2, mer.dwMousePosition.Y-11) == 1) {
 					selectFlag = 1;
 					break;
 				}
 			}
-			printf(" i : %d", i);
+			printf(" cur : %d", cur_Car);
 		}
 		else if (mer.dwButtonState == RIGHTMOST_BUTTON_PRESSED)
 		{
@@ -171,15 +171,15 @@ VOID MouseEventProc(MOUSE_EVENT_RECORD mer)
 	case MOUSE_MOVED:
 		printf("mouse moved, x:%d, y:%d / prevX : %d, prevY : %d", 
 			mer.dwMousePosition.X, mer.dwMousePosition.Y, prev.X, prev.Y);
-		if (mer.dwMousePosition.X - prev.X == 2) key = left;
-		else if (mer.dwMousePosition.X - prev.X == -2)key = right;
+		if (mer.dwMousePosition.X - prev.X == 1) key = right;
+		else if (mer.dwMousePosition.X - prev.X == -1)key = left;
 	
 		if (mer.dwMousePosition.Y - prev.Y == 1) key = down;
 		else if (mer.dwMousePosition.Y - prev.Y == -1) key = up;
 			
 		// sFlag에 따라 구분
-		if (selectFlag == 1 && i !=8) {
-			cars[i].moveCar(key, &selectFlag);
+		if (selectFlag == 1 && cur_Car < 8) {
+			cars[cur_Car].moveCar(key, &selectFlag);
 		}
 
 		prev.X = mer.dwMousePosition.X;
