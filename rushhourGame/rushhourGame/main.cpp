@@ -197,13 +197,14 @@ VOID MouseEventProc(MOUSE_EVENT_RECORD mer)
 int main() {
 	introMenu();
 	stageSetting();
+
+	HANDLE _hStdin = GetStdHandle(STD_INPUT_HANDLE);
+	DWORD _fdwSaveOldMode, _cNumRead;
+	GetConsoleMode(_hStdin, &_fdwSaveOldMode);
+	DWORD _fdwMode = ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT;
+	SetConsoleMode(_hStdin, _fdwMode);
+	INPUT_RECORD _irInBuf[128];
 	while (1) {
-		HANDLE _hStdin = GetStdHandle(STD_INPUT_HANDLE);
-		DWORD _fdwSaveOldMode, _cNumRead;
-		GetConsoleMode(_hStdin, &_fdwSaveOldMode);
-		DWORD _fdwMode = ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT;
-		SetConsoleMode(_hStdin, _fdwMode);
-		INPUT_RECORD _irInBuf[128];
 
 		ReadConsoleInput(
 			_hStdin,      // input buffer handle 
