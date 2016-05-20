@@ -16,7 +16,7 @@ public:
 		_map[3][7] = 0;
 	}
 	void setCar(Car *car);
-
+	Car* getCar() { return _car; }
 	void drawCar(Car car,const int status);
 private:
 	Car *_car;
