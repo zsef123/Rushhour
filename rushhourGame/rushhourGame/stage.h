@@ -1,10 +1,9 @@
 #pragma once
 #include "carBlock.h"
-
+#include "mouse.h"
 extern int _map[8][8];
 class Stage {
 public:
-
 	Stage(Car *car) {
 		car = _car;
 		for (int i = 0; i < 8; i++) {
@@ -18,6 +17,7 @@ public:
 	void setCar(Car *car);
 	Car* getCar() { return _car; }
 	void drawCar(Car car,const int status);
+
 private:
 	Car *_car;
 };
