@@ -202,7 +202,8 @@ int main() {
 	DWORD _fdwSaveOldMode, _cNumRead;
 	GetConsoleMode(_hStdin, &_fdwSaveOldMode);
 	DWORD _fdwMode = ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT;
-	SetConsoleMode(_hStdin, _fdwMode);
+	_fdwMode &= ~ENABLE_QUICK_EDIT_MODE;
+	SetConsoleMode(_hStdin, _fdwMode | ENABLE_EXTENDED_FLAGS);
 	INPUT_RECORD _irInBuf[128];
 	while (1) {
 
