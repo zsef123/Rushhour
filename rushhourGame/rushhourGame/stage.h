@@ -15,6 +15,8 @@ public:
 		}
 		_map[3][7] = 0;
 	}
+	// 여기서 car를 만든후 map에 집어 넣는다. 
+	//그후 map은 public으로 돌려서 ctrl에서 호출
 	void setCar(Car *car);
 	Car* getCar() { return _car; }
 	void drawCar(Car car,const int status);
