@@ -2,7 +2,7 @@
 rush hour
 OOP P final project
 ***************************/
-
+#pragma comment(lib,"winmm.lib")
 #include <iostream>
 #include <conio.h>
 #include "mouse.h"

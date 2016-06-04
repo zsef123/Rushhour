@@ -42,6 +42,7 @@ public:
 		}
 	}
 private:
+
 	HANDLE _hStdin;
 	DWORD _cNumRead, _fdwMode, _i, _fdwSaveOldMode;
 	INPUT_RECORD _irInBuf[128];
