@@ -4,6 +4,13 @@ int Stage::_map[8][8];
 
 void Stage::setCar() {
 	// temp stage 1 
+	for (int i = 1; i < 7; i++) {
+		for (int j = 1; j < 7; j++) {
+			_map[i][j] = 0;
+		}
+	}
+	_map[3][7] = 0;
+
 	_car[0] = new hCar(2, 3, 2);
 	_car[1] = new hCar(1, 1, 2);
 	_car[2] = new hCar(5, 5, 2);

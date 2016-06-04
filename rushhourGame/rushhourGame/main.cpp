@@ -98,16 +98,20 @@ void stageSetting() {
 
 int main() {
 	introMenu();
-	Stage stg1;
-	stg1.setCar();
-	inputMouse a(stg1.getCar());
-	while (1) {
-		a.read();
+	Stage stg[2];
+	
+	for (int i = 0; i < 2; i++) {
+		stg[i].setCar();
+		inputMouse a(stg[i].getCar());
+		while (1) {
+			a.read();
 
-		printScreen(&stg1);
-		if (stg1._map[3][7] != 0) {
-			printf("GAME OVER");
-			break;
+			printScreen(&stg[i]);
+			if (stg[i]._map[3][7] != 0) {
+				printf("GAME OVER");
+				break;
+			}
 		}
 	}
+	
 }

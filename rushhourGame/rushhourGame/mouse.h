@@ -11,7 +11,9 @@ public:
 		SetConsoleMode(_hStdin, _fdwMode | ENABLE_EXTENDED_FLAGS);
 		cars = a;
 	}
-
+	void setCar(Car** a) {
+		cars = a;
+	}
 	void read() {
 		ReadConsoleInput(_hStdin, _irInBuf, 128, &_cNumRead);
 		for (int i = 0; i < (int)_cNumRead; i++)
