@@ -3,7 +3,7 @@
 #include "stage.h"
 class inputMouse {
 public:
-	inputMouse(Car* a ) {
+	inputMouse(Car** a ) {
 		_hStdin = GetStdHandle(STD_INPUT_HANDLE);
 		GetConsoleMode(_hStdin, &_fdwSaveOldMode);
 		_fdwMode = ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT;
@@ -14,7 +14,7 @@ public:
 
 	void read() {
 		ReadConsoleInput(_hStdin, _irInBuf, 128, &_cNumRead);
-		for (int i = 0; i < _cNumRead; i++)
+		for (int i = 0; i < (int)_cNumRead; i++)
 		{
 			switch (_irInBuf[i].EventType)
 			{
@@ -45,7 +45,7 @@ private:
 	INPUT_RECORD _irInBuf[128];
 
 	int selectFlag, cur_Car;
-	Car* cars;
+	Car** cars;
 	COORD prev;
 
 	VOID MouseEventProc(MOUSE_EVENT_RECORD mer)
@@ -65,7 +65,7 @@ private:
 				//이떄 sFlag on
 
 				for (cur_Car = 0; cur_Car < 8; cur_Car++) {
-					if (cars[cur_Car].isSelect(mer.dwMousePosition.X / 2, mer.dwMousePosition.Y - 11) == 1) {
+					if (cars[cur_Car]->isSelect(mer.dwMousePosition.X / 2, mer.dwMousePosition.Y - 11) == 1) {
 						selectFlag = 1;
 						break;
 					}
@@ -100,7 +100,7 @@ private:
 			printf("sFlag: %d, cur: %d", selectFlag, cur_Car);
 			// sFlag에 따라 구분
 			if (selectFlag == 1 && cur_Car < 8) {
-				cars[cur_Car].moveCar(key, &selectFlag);
+				cars[cur_Car]->moveCar(key, &selectFlag);
 			}
 
 			prev.X = mer.dwMousePosition.X;

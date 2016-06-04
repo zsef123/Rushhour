@@ -1,24 +1,29 @@
 #include "stage.h"
 
-int _map[8][8] = { 0 };
-void Stage::setCar(Car *car) { car = _car; }
-//왜 const Car하면 안될까
-void Stage::drawCar(Car car, const int status) {
-	// Car 별로 저장해놨다가
-	// moveCar를할시에 기존의 Car( 같은 index ) 를 지우고 이번에 들어온 정보로 새로 setCar를한다
-	int x, y;
-	int size, vStatus;
-	car.getPosition(&x, &y);
-	car.getInfo(&size, &vStatus);
-	if (vStatus == 0) {
-		for (int i = 0; i < size; i++) {
-			_map[y][x + i] += size * status;
-		}
-	}
-	else {
-		for (int i = 0; i < size; i++) {
-			_map[y + i][x] += size * status;
-		}
-	}
+int Stage::_map[8][8];
 
+void Stage::setCar() {
+	// temp stage 1 
+	_car[0] = new hCar(2, 3, 2);
+	_car[1] = new hCar(1, 1, 2);
+	_car[2] = new hCar(5, 5, 2);
+	_car[3] = new hCar(3, 6, 3);
+	_car[4] = new vCar(1, 2, 3);
+	_car[5] = new vCar(1, 5, 2);
+	_car[6] = new vCar(4, 2, 3);
+	_car[7] = new vCar(6, 1, 2);
+
+	Stage::drawCar(1);
+}
+int (*Stage::getMap())[8] {
+	return _map;
+}
+Car** Stage::getCar() {
+	return _car;
+}
+//왜 const Car하면 안될까
+void Stage::drawCar( const int status) {
+	for (int i = 0; i < sizeof(_car) / sizeof(Car*); i++) {
+		_car[i]->draw(1);
+	}
 }
