@@ -27,7 +27,10 @@
     <ClInclude Include="mouse.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sound.h">
+    <ClInclude Include="Wave.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Clock.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,8 +47,22 @@
     <ClCompile Include="mouse.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sound.cpp">
+    <ClCompile Include="Wave.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Clock.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="alert.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="bg.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="tetris.mp3">
+      <Filter>리소스 파일</Filter>
+    </Media>
   </ItemGroup>
 </Project>

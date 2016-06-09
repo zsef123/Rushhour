@@ -65,7 +65,6 @@ int vCar::moveCar(const int key, int *sFlag) {
 	draw(1);
 	return 1;
 }
-
 int hCar::moveCar(const int key, int *sFlag) {
 	if (collision(key) == 1) return 0;
 	if (key == choice) {

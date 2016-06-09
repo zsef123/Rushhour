@@ -149,17 +149,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="carBlock.h" />
+    <ClInclude Include="Clock.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="output.h" />
-    <ClInclude Include="Sound.h" />
+    <ClInclude Include="Wave.h" />
     <ClInclude Include="stage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="carBlock.cpp" />
+    <ClCompile Include="Clock.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mouse.cpp" />
-    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Wave.cpp" />
     <ClCompile Include="stage.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="alert.wav" />
+    <Media Include="bg.wav" />
+    <Media Include="tetris.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

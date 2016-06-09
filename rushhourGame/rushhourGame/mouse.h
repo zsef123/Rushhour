@@ -1,6 +1,7 @@
 #pragma once
 #include <windows.h>
 #include "stage.h"
+#include "Wave.h"
 class inputMouse {
 public:
 	inputMouse(Car** a ) {
@@ -10,11 +11,14 @@ public:
 		_fdwMode &= ~ENABLE_QUICK_EDIT_MODE;
 		SetConsoleMode(_hStdin, _fdwMode | ENABLE_EXTENDED_FLAGS);
 		cars = a;
+
+		effect.setFile("alert.wav");
 	}
 	void setCar(Car** a) {
 		cars = a;
 	}
-	void read() {
+	int read() {
+		int chk=0;
 		ReadConsoleInput(_hStdin, _irInBuf, 128, &_cNumRead);
 		for (int i = 0; i < (int)_cNumRead; i++)
 		{
@@ -24,7 +28,7 @@ public:
 				break;
 
 			case MOUSE_EVENT: // mouse input 
-				MouseEventProc(_irInBuf[i].Event.MouseEvent);
+				MouseEventProc(_irInBuf[i].Event.MouseEvent,&chk);
 				// moved event process while button presse
 				break;
 
@@ -40,6 +44,7 @@ public:
 				break;
 			}
 		}
+		return chk;
 	}
 private:
 
@@ -51,29 +56,25 @@ private:
 	Car** cars;
 	COORD prev;
 
-	VOID MouseEventProc(MOUSE_EVENT_RECORD mer)
+	Wave effect;
+	VOID MouseEventProc(MOUSE_EVENT_RECORD mer, int *chk)
 	{
 #ifndef MOUSE_HWHEELED
 #define MOUSE_HWHEELED 0x0008
 #endif
-		printf("Mouse event: ");
 		int key = 0;
 		switch (mer.dwEventFlags)
 		{
 		case 0:
-
+			effect.play(1);
 			if (mer.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED)
 			{
-				printf("left button press \n");
-				//¿Ããö sFlag on
-
 				for (cur_Car = 0; cur_Car < 8; cur_Car++) {
-					if (cars[cur_Car]->isSelect(mer.dwMousePosition.X / 2, mer.dwMousePosition.Y - 11) == 1) {
+					if (cars[cur_Car]->isSelect(mer.dwMousePosition.X / 2, mer.dwMousePosition.Y - 1) == 1) {
 						selectFlag = 1;
 						break;
 					}
 				}
-				printf(" cur : %d", cur_Car);
 			}
 			else if (mer.dwButtonState == RIGHTMOST_BUTTON_PRESSED)
 			{
@@ -81,20 +82,17 @@ private:
 			}
 			else
 			{
-				printf("button press\n");
-				//¿Ã∂© sFlag off
 				selectFlag = 0;
 			}
 			break;
 		case DOUBLE_CLICK:
-			printf("double click\n");
 			break;
 		case MOUSE_HWHEELED:
-			printf("horizontal mouse wheel\n");
 			break;
 		case MOUSE_MOVED:
+			/*
 			printf("mouse moved, x:%d, y:%d / prevX : %d, prevY : %d\n",
-				mer.dwMousePosition.X, mer.dwMousePosition.Y, prev.X, prev.Y);
+				mer.dwMousePosition.X, mer.dwMousePosition.Y, prev.X, prev.Y);*/
 			if (mer.dwMousePosition.X - prev.X == 1) key = right;
 			else if (mer.dwMousePosition.X - prev.X == -1)key = left;
 
@@ -108,12 +106,11 @@ private:
 
 			prev.X = mer.dwMousePosition.X;
 			prev.Y = mer.dwMousePosition.Y;
+			*chk = 1;
 			break;
 		case MOUSE_WHEELED:
-			printf("vertical mouse wheel\n");
 			break;
 		default:
-			printf("unknown\n");
 			break;
 		}
 	}
